@@ -17,6 +17,9 @@ class CreateQuizUserTable extends Migration
             $table->bigIncrements('id');
             $table->integer('quiz_id');
             $table->integer('user_id');
+            $table->biginteger('usr_created_by')->unsigned()->nullable();
+            $table->biginteger('usr_updated_by')->unsigned()->nullable();
+            $table->biginteger('usr_deleted_by')->unsigned()->nullable();
             $table->timestamps();
         });
     }
