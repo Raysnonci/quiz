@@ -21,7 +21,7 @@
                             <div class="controls">
                                 <select name="quiz_id" class="span8">
                                     @foreach (App\Quiz::all() as $quiz)
-                                        <option value="{{ $quiz->id }}">{{ $quiz->name }}</option>
+                                        <option value="{{ $quiz->quiz_id }}">{{ $quiz->quiz_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -30,7 +30,7 @@
                             <div class="controls">
                                 <select name="user_id" class="span8">
                                     @foreach (App\User::where('is_admin', 0)->get() as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        <option value="{{ $user->user_id }}">{{ $user->user_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

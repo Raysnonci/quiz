@@ -33,7 +33,7 @@ class ExamController extends Controller
         $userId = $request->get('user_id');
         $quizId = $request->get('quiz_id');
         $quiz = Quiz::find($quizId);
-        $result = Result::where('quiz_id', $quizId)->where('user_id', $userId)->exists();
+        $result = Result::where('result_quiz_id', $quizId)->where('result_user_id', $userId)->exists();
         if($result)
         {
             return redirect()->back()->with('message_r', 'This quiz already played by user, So it cannot be removed!');
@@ -46,21 +46,21 @@ class ExamController extends Controller
 
     public function getQuizQuestion(Request $request, $quizId)
     {
-        $authUser = auth()->user()->id;
+        $authUser = auth()->user()->user_id;
 
         //Check if user has been assigned
-        $userId = DB::table('quiz_user')->whereUserId($authUser)->pluck('quiz_id')->toArray();
+        $userId = DB::table('quiz_user')->whereUserId($authUser)->pluck('quiz_user_quiz_id')->toArray();
         if(!in_array($quizId, $userId)){
             return redirect()->to('/home')->with('error', 'You are not assigned this exam');
         }
 
         $quiz = Quiz::find($quizId);
-        $time = Quiz::where('id', $quizId)->value('minutes');
-        $quizQuestions = Question::where('quiz_id',$quizId)->with('answers')->get();
-        $authUserHasPlayedQuiz = Result::where(['user_id'=>$authUser, 'quiz_id'=>$quizId])->get();
+        $time = Quiz::where('quiz_id', $quizId)->value('minutes');
+        $quizQuestions = Question::where('question_quiz_id',$quizId)->with('answers')->get();
+        $authUserHasPlayedQuiz = Result::where(['result_user_id'=>$authUser, 'result_quiz_id'=>$quizId])->get();
 
         //has user played particular quiz
-        $wasCompleted = Result::whereUserId($authUser)->whereIn('quiz_id', (new Quiz)->hasQuizAttempted())->pluck('quiz_id')->toArray();
+        $wasCompleted = Result::whereUserId($authUser)->whereIn('result_quiz_id', (new Quiz)->hasQuizAttempted())->pluck('result_quiz_id')->toArray();
         if(in_array($quizId, $wasCompleted)){
             return redirect()->to('/home')->with('error', 'You already participate in this exam');
         }
@@ -82,14 +82,14 @@ class ExamController extends Controller
             Then the second line means update if exist, and create if doesn't exist
         */
         return $userQuestionAnswer = Result::updateOrCreate(
-            ['user_id' => $authUser->id, 'quiz_id' => $quizId, 'question_id' => $questionId],
-            ['answer_id' => $answerId]
+            ['result_user_id' => $authUser->id, 'result_quiz_id' => $quizId, 'result_question_id' => $questionId],
+            ['result_answer_id' => $answerId]
         );
     }
 
     function viewResult($userId, $quizId)
     {
-        $results = Result::where('user_id', $userId)->where('quiz_id', $quizId)->get();
+        $results = Result::where('result_user_id', $userId)->where('result_quiz_id', $quizId)->get();
         //dd($results);
         return view('result-detail', compact('results'));
     }
@@ -102,21 +102,21 @@ class ExamController extends Controller
 
     public function userQuizResult($userId, $quizId)
     {
-        $results = Result::where('user_id', $userId)->where('quiz_id', $quizId)->get();
-        $totalQuestions = Question::where('quiz_id', $quizId)->count();
+        $results = Result::where('result_user_id', $userId)->where('result_quiz_id', $quizId)->get();
+        $totalQuestions = Question::where('question_quiz_id', $quizId)->count();
         $attemptQuestions = $results->count();
         $ans = [];
         foreach($results as $answer){
-            array_push($ans, $answer->answer_id);
+            array_push($ans, $answer->result_answer_id);
         }
-        $userCorrectedAnswers = Answer::whereIn('id', $ans)->where('is_correct', 1)->count();
+        $userCorrectedAnswers = Answer::whereIn('answer_id', $ans)->where('answer_is_correct', 1)->count();
         $userWrongAnswers = 0;
         $percentage = 0;
         if($attemptQuestions){
             $percentage = ($userCorrectedAnswers/$totalQuestions)*100;
             $userWrongAnswers = $totalQuestions - $userCorrectedAnswers;
         }
-        $quiz = Quiz::where('id', $quizId)->first();
+        $quiz = Quiz::where('quiz_id', $quizId)->first();
         return view('backend.result.result', compact('results', 'totalQuestions', 'attemptQuestions', 'userCorrectedAnswers', 'userWrongAnswers', 'percentage', 'quiz'));
         //dd($percentage);
     }

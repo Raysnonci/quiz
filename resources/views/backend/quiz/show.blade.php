@@ -12,7 +12,7 @@
             <div class="module-body">
                 @if (count($quiz->questions)>0)
                     @foreach ($quiz->questions as $number => $question)
-                        <p><h3>{{ $number+1 }}. {{ $question->question }}</h3></p>
+                        <p><h3>{{ $number+1 }}. {{ $question->question_name }}</h3></p>
 
                         <div class="module-body table">
                             <table class="table table-message">
@@ -23,9 +23,9 @@
                                     @foreach ($question->answers as $key=>$answer)
                                         <tr class="read">
                                             <td class="cell-author hidden-phone hidden-tablet">
-                                                {{ $alphabets[$key] }}. {{ $answer->answer }}
+                                                {{ $alphabets[$key] }}. {{ $answer->answer_name }}
 
-                                                @if ($answer->is_correct==1)
+                                                @if ($answer->answer_is_correct==1)
                                                     <span class="badge badge-success pull-right">
                                                         <b>Correct</b>
                                                     </span>

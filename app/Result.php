@@ -7,9 +7,17 @@ use App\Answer;
 use App\Question;
 class Result extends Model
 {
+    protected $table	= 'results';
+    protected $primaryKey = 'result_id';
+
     protected $fillable = [
-        'user_id', 'question_id' , 'quiz_id' , 'answer_id'
+        'result_user_id', 'result_question_id' , 'result_quiz_id' , 'result_answer_id'
     ];
+
+    public function getPrefixName()
+    {
+        return "result";
+    }
 
     public function question()
     {

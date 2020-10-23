@@ -33,24 +33,24 @@
                             @foreach ($quizzes as $key=>$quiz)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $quiz->name }}</td>
-                                    <td>{{ $quiz->description }}</td>
-                                    <td>{{ $quiz->minutes }}</td>
+                                    <td>{{ $quiz->quiz_name }}</td>
+                                    <td>{{ $quiz->quiz_description }}</td>
+                                    <td>{{ $quiz->quiz_minutes }}</td>
                                     <td>
-                                        <a href="{{ route('quiz.show', [$quiz->id]) }}" class="btn btn-inverse">View Questions</a>
+                                        <a href="{{ route('quiz.show', [$quiz->quiz_id]) }}" class="btn btn-inverse">View Questions</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('quiz.edit', [$quiz->id]) }}" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('quiz.edit', [$quiz->quiz_id]) }}" class="btn btn-success">Edit</a>
                                     </td>
                                     <td>
-                                        <form id="delete-form{{ $quiz->id }}" method="POST" action="{{ route('quiz.destroy', [$quiz->id]) }}">
+                                        <form id="delete-form{{ $quiz->quiz_id }}" method="POST" action="{{ route('quiz.destroy', [$quiz->quiz_id]) }}">
                                             @csrf
                                             {{ method_field('DELETE') }}
                                             {{-- <a href="#" class="btn btn-danger">Delete</a> --}}
                                             <input type="submit" value="Delete" class="btn btn-danger" onclick="if(confirm('Do you want to delete?'))
                                             {
                                                 event.preventDefault();
-                                                document.getElementById('delete-form{{ $quiz->id }}').submit()
+                                                document.getElementById('delete-form{{ $quiz->quiz_id }}').submit()
                                             }else{
                                                 event.preventDefault();
                                             }

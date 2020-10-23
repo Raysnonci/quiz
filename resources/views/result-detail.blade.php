@@ -13,25 +13,25 @@
 
                         <div class="card-body">
                             <p>
-                                <h3>{{ $result->question->question }}</h3>
+                                <h3>{{ $result->question->question_name }}</h3>
                             </p>
 
                             @php
                                 $alphabets = range('A', 'D');
-                                $answers = DB::table('answers')->where('question_id', $result->question_id)->get();
+                                $answers = DB::table('answers')->where('question_id', $result->result_question_id)->get();
                             @endphp
                             @foreach ($answers as $ans => $answer)
                                 <p>
-                                    {{ $alphabets[$ans] }}.) {{ $answer->answer }}
-                                    @if ($answer->is_correct)
+                                    {{ $alphabets[$ans] }}.) {{ $answer->answer_name }}
+                                    @if ($answer->answer_is_correct)
                                         <span class="badge badge-success">Correct Answer</span>
                                     @endif
                                 </p>
                             @endforeach
                             
-                            Your Answer: <mark>{{ $result->answer->answer }} </mark>
+                            Your Answer: <mark>{{ $result->answer->answer_name }} </mark>
                             <p>
-                                @if ($result->answer->is_correct)
+                                @if ($result->answer->answer_is_correct)
                                     <span class="badge badge-success">Your answer is correct</span>
                                 @else
                                     <span class="badge badge-danger">Your answer is wrong</span>

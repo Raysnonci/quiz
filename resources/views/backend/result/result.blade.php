@@ -31,7 +31,7 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>{{ $quiz->name }}</td>
+                            <td>{{ $quiz->quiz_name }}</td>
                             <td>{{ $totalQuestions }}</td>
                             <td>{{ $attemptQuestions }}</td>
                             <td>{{ $userCorrectedAnswers }}</td>
@@ -61,9 +61,9 @@
                         @foreach ($results as $key=>$result)
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $result->question->question }}</td>
-                                <td>{{ $result->answer->answer }}</td>
-                                @if ($result->answer->is_correct)
+                                <td>{{ $result->question->question_name }}</td>
+                                <td>{{ $result->answer->answer_name }}</td>
+                                @if ($result->answer->answer_is_correct)
                                     <td style="color: green;">Correct</td>
                                 @else
                                     <td style="color: red;">Wrong</td>

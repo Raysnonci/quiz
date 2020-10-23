@@ -21,7 +21,7 @@
                             <div class="controls">
                                 <select name="quiz" class="span8">
                                     @foreach ($quizzes as $quiz)
-                                        <option value="{{ $quiz->id }}">{{ $quiz->name }}</option>
+                                        <option value="{{ $quiz->quiz_id }}">{{ $quiz->quiz_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

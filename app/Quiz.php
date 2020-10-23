@@ -8,8 +8,18 @@ use App\User;
 
 class Quiz extends Model
 {
+    protected $table	= 'quizzes';
+    protected $primaryKey = 'quiz_id';
+
+    use Blameable;
+
+    public function getPrefixName()
+    {
+        return "quiz";
+    }
+
     protected $fillable = [
-        'name', 'description', 'minutes'
+        'quiz_name', 'quiz_description', 'quiz_minutes'
     ];
 
     public function questions(){
@@ -18,7 +28,7 @@ class Quiz extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'quiz_user');
+        return $this->belongsToMany(User::class, 'quiz_user', 'quiz_user_quiz_id', 'quiz_user_user_id');
     }
 
     public function storeQuiz($data){

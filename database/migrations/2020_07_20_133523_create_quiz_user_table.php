@@ -14,12 +14,11 @@ class CreateQuizUserTable extends Migration
     public function up()
     {
         Schema::create('quiz_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('quiz_id');
-            $table->integer('user_id');
-            $table->biginteger('usr_created_by')->unsigned()->nullable();
-            $table->biginteger('usr_updated_by')->unsigned()->nullable();
-            $table->biginteger('usr_deleted_by')->unsigned()->nullable();
+            $table->bigIncrements('quiz_user_id');
+            $table->integer('quiz_user_quiz_id');
+            $table->integer('quiz_user_user_id');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

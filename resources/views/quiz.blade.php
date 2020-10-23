@@ -2,8 +2,8 @@
 
 @section('content')
     <quiz-component
-    :times = "{{ $quiz->minutes }}"
-    :quiz-id = "{{ $quiz->id }}"
+    :times = "{{ $quiz->quiz_minutes }}"
+    :quiz-id = "{{ $quiz->quiz_id }}"
     :quiz-questions = "{{ $quizQuestions }}"
     :has-quiz-played = "{{ $authUserHasPlayedQuiz }}"
     >

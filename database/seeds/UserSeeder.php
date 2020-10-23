@@ -13,27 +13,27 @@ class UserSeeder extends Seeder
     public function run()
     {
         $admin = new User();
-        $admin->name = "admin";
-        $admin->email = "admin@gmail.com";
-        $admin->password = bcrypt("password");
-        $admin->visible_password = "password";
-        $admin->email_verified_at = NOW();
-        $admin->occupation = "CEO";
-        $admin->address = "Indonesia";
-        $admin->phone = "123456789";
-        $admin->is_admin = 1;
+        $admin->user_name = "admin";
+        $admin->user_email = "admin@gmail.com";
+        $admin->user_password = bcrypt("password");
+        $admin->user_visible_password = "password";
+        $admin->user_email_verified_at = NOW();
+        $admin->user_occupation = "CEO";
+        $admin->user_address = "Indonesia";
+        $admin->user_phone = "123456789";
+        $admin->user_is_admin = 1;
         $admin->save();
         
         $student = new User();
-        $student->name = "student";
-        $student->email = "student@gmail.com";
-        $student->password = bcrypt("password");
-        $student->visible_password = "password";
-        $student->email_verified_at = NOW();
-        $student->occupation = "Student";
-        $student->address = "Indonesia";
-        $student->phone = "123456789";
-        $student->is_admin = 0;
+        $student->user_name = "student";
+        $student->user_email = "student@gmail.com";
+        $student->user_password = bcrypt("password");
+        $student->user_visible_password = "password";
+        $student->user_email_verified_at = NOW();
+        $student->user_occupation = "Student";
+        $student->user_address = "Indonesia";
+        $student->user_phone = "123456789";
+        $student->user_is_admin = 0;
         $student->save();
     }
 }

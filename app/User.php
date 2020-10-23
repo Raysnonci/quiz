@@ -8,6 +8,9 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    protected $table	= 'users';
+    protected $primaryKey = 'user_id';
+
     use Notifiable;
     use Blameable;
 
@@ -17,8 +20,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'visible_password', 'occupation', 'address', 'phone', 'is_admin', 
+        'user_name', 'user_email', 'user_password', 'user_visible_password', 'user_occupation', 'user_address', 'user_phone', 'user_is_admin', 
     ];
+
+    public function getAuthPassword()
+    {
+        return $this->user_password;
+    }
+
+
+    public function getPrefixName()
+    {
+        return "user";
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -35,16 +49,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'user_email_verified_at' => 'datetime',
     ];
 
     private $limit=10;
 
     public function storeUser($data)
     {
-        $data['visible_password'] = $data['password'];
-        $data['password'] = bcrypt($data['password']);
-        $data['sis_admin'] = 0;
+        $data['user_visible_password'] = $data['password'];
+        $data['user_password'] = bcrypt($data['password']);
+        $data['user_is_admin'] = 0;
         return User::create($data);
     }
 
@@ -64,14 +78,14 @@ class User extends Authenticatable
 
         if($data['password'])
         {
-            $user->password = bcrypt($data['password']);
-            $user->visible_password = $data['password'];
+            $user->user_password = bcrypt($data['password']);
+            $user->user_visible_password = $data['password'];
         }
 
-        $user->name = $data['name'];
-        $user->occupation = $data['occupation'];
-        $user->address = $data['address'];
-        $user->phone = $data['phone'];
+        $user->user_name = $data['name'];
+        $user->user_occupation = $data['occupation'];
+        $user->user_address = $data['address'];
+        $user->user_phone = $data['phone'];
         $user->save();
         return $user;
     }

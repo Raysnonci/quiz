@@ -26,20 +26,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->is_admin == 1)
+        if(auth()->user()->user_is_admin == 1)
         {
             return redirect('/');
         }
-        $authUser = auth()->user()->id;
+        $authUser = auth()->user()->user_id;
         $assignedQuizId = [];
-        $user = DB::table('quiz_user')->where('user_id', $authUser)->get();
+        $user = DB::table('quiz_user')->where('quiz_user_user_id', $authUser)->get();
         foreach ($user as $u) {
             array_push($assignedQuizId, $u->quiz_id);
         }
-        $quizzes = Quiz::whereIn('id', $assignedQuizId)->get();//where ngebandingin satu data, klo whereIn ngebandingin array
+        $quizzes = Quiz::whereIn('quiz_id', $assignedQuizId)->get();//where ngebandingin satu data, klo whereIn ngebandingin array
 
-        $isExamAssigned = DB::table('quiz_user')->where('user_id', $authUser)->exists();
-        $wasQuizCompleted = Result::where('user_id', $authUser)->whereIn('quiz_id', (new Quiz())->hasQuizAttempted())->pluck('quiz_id')->toArray();
+        $isExamAssigned = DB::table('quiz_user')->where('quiz_user_user_id', $authUser)->exists();
+        $wasQuizCompleted = Result::where('result_user_id', $authUser)->whereIn('result_quiz_id', (new Quiz())->hasQuizAttempted())->pluck('result_quiz_id')->toArray();
 
         return view('home', compact('quizzes', 'wasQuizCompleted', 'isExamAssigned'));
     }

@@ -7,10 +7,20 @@ use App\Answer;
 use App\Quiz;
 class Question extends Model
 {
+    use Blameable;
+    
+    protected $table	= 'questions';
+    protected $primaryKey = 'question_id';
+
     protected $fillable =[
-        'question', 'quiz_id'
+        'question_name', 'question_quiz_id'
     ];
     private $limit = 10, $order = 'DESC';
+
+    public function getPrefixName()
+    {
+        return "question";
+    }
 
     public function answers()
     {
@@ -41,8 +51,8 @@ class Question extends Model
     public function updateQuestion($data, $id)
     {
         $question = Question::find($id);
-        $question->question = $data['question'];
-        $question->quiz_id = $data['quiz'];
+        $question->question_name = $data['question'];
+        $question->question_quiz_id = $data['quiz'];
         $question->save();
         return $question;
     }

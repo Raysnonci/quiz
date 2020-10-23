@@ -21,9 +21,9 @@
                             @foreach ($question->answers as $key=>$answer)
                                 <tr class="read">
                                     <td class="cell-author hidden-phone hidden-tablet">
-                                        {{ $alphabets[$key] }}. {{ $answer->answer }}
+                                        {{ $alphabets[$key] }}. {{ $answer->answer_name }}
 
-                                        @if ($answer->is_correct==1)
+                                        @if ($answer->answer_is_correct==1)
                                             <span class="badge badge-success pull-right">
                                                 <b>Correct</b>
                                             </span>
@@ -36,17 +36,17 @@
                 </div>
 
                 <div class="module-foot">
-                    <a href="{{ route('question.edit', [$question->id]) }}" class="btn btn-light"><button class="btn btn-primary">Edit</button></a>
+                    <a href="{{ route('question.edit', [$question->question_id]) }}" class="btn btn-light"><button class="btn btn-primary">Edit</button></a>
                     
                     <button class="btn btn-light">
-                        <form id="delete-form{{ $question->id }}" method="POST" action="{{ route('question.destroy', [$question->id]) }}">
+                        <form id="delete-form{{ $question->question_id }}" method="POST" action="{{ route('question.destroy', [$question->id]) }}">
                             @csrf
                             {{ method_field('DELETE') }}
                             {{-- <a href="#" class="btn btn-danger">Delete</a> --}}
                             <input type="submit" value="Delete" class="btn btn-danger" onclick="if(confirm('Do you want to delete?'))
                             {
                                 event.preventDefault();
-                                document.getElementById('delete-form{{ $question->id }}').submit()
+                                document.getElementById('delete-form{{ $question->question_id }}').submit()
                             }else{
                                 event.preventDefault();
                             }

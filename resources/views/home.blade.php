@@ -12,15 +12,15 @@
                 @if ($isExamAssigned)
                     @foreach ($quizzes as $quiz)
                         <div class="card-body">
-                            <p><h3>{{ $quiz->name }}</h3></p>
-                            <p>About Exam : {{ $quiz->description }}</p>
-                            <p>Time allocated : {{ $quiz->minutes }} minutes</p>
+                            <p><h3>{{ $quiz->quiz_name }}</h3></p>
+                            <p>About Exam : {{ $quiz->quiz_description }}</p>
+                            <p>Time allocated : {{ $quiz->quiz_minutes }} minutes</p>
                             <p>Number of questions : {{ $quiz->questions->count() }}</p>
                             <p>
                                 @if (!in_array($quiz->id, $wasQuizCompleted))
-                                    <a href="/user/quiz/{{ $quiz->id }}" class="btn btn-success">Start Quiz</a>
+                                    <a href="/user/quiz/{{ $quiz->quiz_id }}" class="btn btn-success">Start Quiz</a>
                                 @else
-                                    <a href="/result/user/{{ auth()->user()->id }}/quiz/{{ $quiz->id }}">View Result</a>
+                                    <a href="/result/user/{{ auth()->user()->user_id }}/quiz/{{ $quiz->quiz_id }}">View Result</a>
                                     <span class="float-right"><b>Completed</b></span>
                                 @endif
                             </p>
@@ -39,22 +39,22 @@
                         <tr>
                             <td>Email</td>
                             <td>:</td>
-                            <td>{{ auth()->user()->email }}</td>
+                            <td>{{ auth()->user()->user_email }}</td>
                         </tr>
                         <tr>
                             <td>Occupation</td>
                             <td>:</td>
-                            <td>{{ auth()->user()->occupation }}</td>
+                            <td>{{ auth()->user()->user_occupation }}</td>
                         </tr>
                         <tr>
                             <td>Address</td>
                             <td>:</td>
-                            <td>{{ auth()->user()->address }}</td>
+                            <td>{{ auth()->user()->user_address }}</td>
                         </tr>
                         <tr>
                             <td>Phone</td>
                             <td>:</td>
-                            <td>{{ auth()->user()->phone }}</td>
+                            <td>{{ auth()->user()->user_phone }}</td>
                         </tr>
                     </table>
                 </div>

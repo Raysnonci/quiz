@@ -34,13 +34,13 @@
                                 @foreach ($quiz->users as $user)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $quiz->name }}</td>
+                                        <td>{{ $user->user_name }}</td>
+                                        <td>{{ $quiz->quiz_name }}</td>
                                         <td>
-                                            <a href="{{ route('quiz.show', [$quiz->id]) }}" class="btn btn-inverse">View Questions</a>
+                                            <a href="{{ route('quiz.show', [$quiz->quiz_id]) }}" class="btn btn-inverse">View Questions</a>
                                         </td>
                                         <td>
-                                            <a href="result/{{ $user->id }}/{{ $quiz->id }}" class="btn btn-primary">View Result</a>
+                                            <a href="result/{{ $user->id }}/{{ $quiz->quiz_id }}" class="btn btn-primary">View Result</a>
                                         </td>
                                     </tr>
                                 @endforeach

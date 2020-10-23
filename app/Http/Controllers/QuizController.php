@@ -102,4 +102,9 @@ class QuizController extends Controller
             'minutes' =>'required|integer|min:1'
         ]);
     }
+
+    public function testApi(){
+        return "asdfgh";
+        //nanti tambahin json
+    }
 }

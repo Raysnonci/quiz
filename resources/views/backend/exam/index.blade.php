@@ -34,16 +34,16 @@
                                 @foreach ($quiz->users as $user)
                                     <tr>
                                         <td>{{ ++$key }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $quiz->name }}</td>
+                                        <td>{{ $user->user_name }}</td>
+                                        <td>{{ $quiz->quiz_name }}</td>
                                         <td>
-                                            <a href="{{ route('quiz.show', [$quiz->id]) }}" class="btn btn-inverse">View Questions</a>
+                                            <a href="{{ route('quiz.show', [$quiz->quiz_id]) }}" class="btn btn-inverse">View Questions</a>
                                         </td>
                                         <td>
                                             <form action="{{ route('exam.remove') }}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
+                                                <input type="hidden" name="user_id" value="{{ $user->user_id }}">
+                                                <input type="hidden" name="quiz_id" value="{{ $quiz->quiz_id }}">
                                                 <button class="btn btn-danger" type="submit">Remove</button>
                                             </form>
                                         </td>

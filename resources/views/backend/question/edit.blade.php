@@ -22,10 +22,10 @@
                             <div class="controls">
                                 <select name="quiz" class="span8">
                                     @foreach (App\Quiz::all() as $quiz)
-                                        <option value="{{ $quiz->id }}"
-                                            @if ($question->quiz->id == $quiz->id)
+                                        <option value="{{ $quiz->quiz_id }}"
+                                            @if ($question->quiz->quiz_id == $quiz->quiz_id)
                                                 selected
-                                            @endif>{{ $quiz->name }}</option>
+                                            @endif>{{ $quiz->quiz_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -37,7 +37,7 @@
 
                             <label class="control-label">Question Name</label>
                             <div class="controls">
-                                <input type="text" name="question" class="span8" placeholder="Name of the quiz" value="{{ $question->question }}">
+                                <input type="text" name="question" class="span8" placeholder="Name of the quiz" value="{{ $question->question_name }}">
                             </div>
                             @error('question')
                                 <span class="invalid-feedback" role="alert">
@@ -48,8 +48,8 @@
                             <label class="control-label">Options</label>
                             <div class="controls">
                                 @foreach ($question->answers as $key=>$answer)
-                                    <input type="text" name="options[]" class="span7" value="{{ $answer->answer }}">
-                                    <input type="radio" name="correct_answer" value="{{ $key }}" {{ $answer->is_correct? 'checked':'' }}>
+                                    <input type="text" name="options[]" class="span7" value="{{ $answer->answer_name }}">
+                                    <input type="radio" name="correct_answer" value="{{ $key }}" {{ $answer->answer_is_correct? 'checked':'' }}>
                                     <span>Is correct answer</span>
                                 @endforeach
                             </div>

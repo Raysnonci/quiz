@@ -6,9 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use App\Question;
 class Answer extends Model
 {
+    use Blameable;
+    
+    protected $table	= 'answers';
+    protected $primaryKey = 'answer_id';
+
     protected $fillable =[
-        'question_id', 'answer', 'is_correct'
+        'answer_question_id', 'answer_name', 'answer_is_correct'
     ];
+
+    public function getPrefixName()
+    {
+        return "answer";
+    }
 
     public function question()
     {
@@ -25,9 +35,9 @@ class Answer extends Model
                 $is_correct = true;
             }
             $answer = Answer::create([
-                'question_id' => $question->id,
-                'answer' => $option,
-                'is_correct' => $is_correct
+                'answer_question_id' => $question->id,
+                'answer_name' => $option,
+                'answer_is_correct' => $is_correct
             ]);
         }
     }
@@ -46,15 +56,15 @@ class Answer extends Model
                 $is_correct = true;
             }
             Answer::find($answer->id)->update([
-                'question_id' => $question->id,
-                'answer' => $option,
-                'is_correct' => $is_correct
+                'answer_question_id' => $question->id,
+                'answer_name' => $option,
+                'answer_is_correct' => $is_correct
             ]);
         }
     }
 
     public function deleteAnswer($questionId)
     {
-        return Answer::where('question_id', $questionId)->delete();
+        return Answer::where('answer_question_id', $questionId)->delete();
     }
 }
