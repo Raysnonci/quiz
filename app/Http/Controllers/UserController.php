@@ -38,7 +38,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|unique:users,user_email',
             'password' => 'required|min:3',
         ]);
         $user = (new User())->storeUser($request->all());

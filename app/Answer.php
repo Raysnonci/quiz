@@ -12,7 +12,7 @@ class Answer extends Model
     protected $primaryKey = 'answer_id';
 
     protected $fillable =[
-        'answer_question_id', 'answer_name', 'answer_is_correct'
+        'answer_question_id', 'answer_name', 'answer_is_correct', 'answer_created_by', 'answer_updated_by'
     ];
 
     public function getPrefixName()
@@ -35,7 +35,7 @@ class Answer extends Model
                 $is_correct = true;
             }
             $answer = Answer::create([
-                'answer_question_id' => $question->id,
+                'answer_question_id' => $question->question_id,
                 'answer_name' => $option,
                 'answer_is_correct' => $is_correct
             ]);

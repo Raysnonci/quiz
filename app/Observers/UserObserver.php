@@ -14,10 +14,9 @@ class UserObserver
     {
         $created_by = $model->getPrefixName()."_created_by";
         $updated_by = $model->getPrefixName()."_updated_by";
-        
         if(Auth::user()){
-            $model->$created_by = Auth::user()->id;
-            $model->$updated_by = Auth::user()->id;
+            $model->$created_by = Auth::user()->user_id;
+            $model->$updated_by = Auth::user()->user_id;
         }
     }
 
@@ -26,6 +25,7 @@ class UserObserver
      */
     public function updating(Model $model)
     {
-        $model->updated_by = Auth::user()->id;
+        $updated_by = $model->getPrefixName()."_updated_by";
+        $model->$updated_by = Auth::user()->user_id;
     }
 }

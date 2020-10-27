@@ -17,8 +17,8 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('question_id');
             $table->string('question_name');
             $table->integer('question_quiz_id');
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('question_created_by')->nullable();
+            $table->unsignedBigInteger('question_updated_by')->nullable();
             $table->timestamps();
         });
     }

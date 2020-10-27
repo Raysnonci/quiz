@@ -11,7 +11,7 @@ class Result extends Model
     protected $primaryKey = 'result_id';
 
     protected $fillable = [
-        'result_user_id', 'result_question_id' , 'result_quiz_id' , 'result_answer_id'
+        'result_user_id', 'result_question_id' , 'result_quiz_id' , 'result_answer_id', 'result_created_by', 'result_updated_by'
     ];
 
     public function getPrefixName()

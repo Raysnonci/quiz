@@ -19,7 +19,7 @@ class Quiz extends Model
     }
 
     protected $fillable = [
-        'quiz_name', 'quiz_description', 'quiz_minutes'
+        'quiz_name', 'quiz_description', 'quiz_minutes', 'quiz_created_by', 'quiz_updated_by'
     ];
 
     public function questions(){
@@ -32,6 +32,9 @@ class Quiz extends Model
     }
 
     public function storeQuiz($data){
+        $data['quiz_name'] = $data['name'];
+        $data['quiz_description'] = $data['description'];
+        $data['quiz_minutes'] = $data['minutes'];
         return Quiz::create($data);
     }
 
@@ -46,6 +49,9 @@ class Quiz extends Model
 
     public function updateQuiz($data, $id)
     {
+        $data['quiz_name'] = $data['name'];
+        $data['quiz_description'] = $data['description'];
+        $data['quiz_minutes'] = $data['minutes'];
         return Quiz::find($id)->update($data);
     }
 

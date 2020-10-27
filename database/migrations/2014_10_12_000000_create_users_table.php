@@ -24,8 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('user_address')->nullable();
             $table->string('user_phone')->nullable();
             $table->integer('user_is_admin')->default(0);
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('user_created_by')->nullable();
+            $table->unsignedBigInteger('user_updated_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

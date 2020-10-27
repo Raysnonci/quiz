@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Providers\CustomUserProvider;
 
 class LoginController extends Controller
 {
@@ -34,17 +35,17 @@ class LoginController extends Controller
         return 'user_email';
     }
 
-    protected function validateLogin($data)
+    protected function validateLogin(Request $request)
     {
-        $data->validate([
+        $request->validate([
             $this->username() => 'required|string',
             'user_password' => 'required|string',
         ]);
     }
 
-    protected function credentials($data)
+    protected function credentials(Request $request)
     {
-        return $data->only($this->username(), 'user_password');
+        return $request->only($this->username(), 'user_password');
     }
 
     /**

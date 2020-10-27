@@ -18,8 +18,8 @@ class CreateQuizzesTable extends Migration
             $table->string('quiz_name');
             $table->text('quiz_description');
             $table->integer('quiz_minutes');
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('quiz_created_by')->nullable();
+            $table->unsignedBigInteger('quiz_updated_by')->nullable();
             $table->timestamps();
         });
     }

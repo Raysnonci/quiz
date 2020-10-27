@@ -18,8 +18,8 @@ class CreateAnswersTable extends Migration
             $table->integer('answer_question_id');
             $table->string('answer_name');
             $table->boolean('answer_is_correct');
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('answer_created_by')->nullable();
+            $table->unsignedBigInteger('answer_updated_by')->nullable();
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@
             @if(Session::has('message'))
                 <div class="alert alert-success">{{ Session::get('message') }}</div>
             @endif
-            <form action="{{ route('question.update', [$question->id]) }}" method="POST">
+            <form action="{{ route('question.update', [$question->question_id]) }}" method="POST">
                 @csrf
                 {{ method_field('PUT') }}
                 <div class="module">

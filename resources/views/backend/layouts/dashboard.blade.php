@@ -5,7 +5,7 @@
                 <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>{{ App\Quiz::count() }}</b>
                     <p class="text-muted">
                         Quizzes</p>
-                </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>{{ App\User::where('is_admin', 0)->count() }}</b>
+                </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>{{ App\User::where('user_is_admin', 0)->count() }}</b>
                     <p class="text-muted">
                         Users</p>
                 </a><a href="#" class="btn-box big span4"><i class="icon-money"></i><b>{{ App\Question::count() }}</b>

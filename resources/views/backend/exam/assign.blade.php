@@ -29,7 +29,7 @@
                             <label class="control-label">Select User</label>
                             <div class="controls">
                                 <select name="user_id" class="span8">
-                                    @foreach (App\User::where('is_admin', 0)->get() as $user)
+                                    @foreach (App\User::where('user_is_admin', 0)->get() as $user)
                                         <option value="{{ $user->user_id }}">{{ $user->user_name }}</option>
                                     @endforeach
                                 </select>

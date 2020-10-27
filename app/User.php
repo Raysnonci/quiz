@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_name', 'user_email', 'user_password', 'user_visible_password', 'user_occupation', 'user_address', 'user_phone', 'user_is_admin', 
+        'user_name', 'user_email', 'user_password', 'user_visible_password', 'user_occupation', 'user_address', 'user_phone', 'user_is_admin', 'user_created_by', 'user_updated_by'
     ];
 
     public function getAuthPassword()
@@ -56,6 +56,11 @@ class User extends Authenticatable
 
     public function storeUser($data)
     {
+        $data['user_name'] = $data['name'];
+        $data['user_email'] = $data['email'];
+        $data['user_occupation'] = $data['occupation'];
+        $data['user_address'] = $data['address'];
+        $data['user_phone'] = $data['phone'];
         $data['user_visible_password'] = $data['password'];
         $data['user_password'] = bcrypt($data['password']);
         $data['user_is_admin'] = 0;

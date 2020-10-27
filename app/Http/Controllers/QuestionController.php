@@ -16,6 +16,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
+        $data = file_get_contents('http://www.omdbapi.com/?apikey=13c6c5e9&s=habibie');
+        $menu = json_decode($data, true);
+        dd($menu);
         $questions = (new Question())->getQuestions();
         return view('backend.question.index', compact('questions'));
     }

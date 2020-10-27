@@ -13,7 +13,7 @@ class Question extends Model
     protected $primaryKey = 'question_id';
 
     protected $fillable =[
-        'question_name', 'question_quiz_id'
+        'question_name', 'question_quiz_id', 'question_created_by', 'question_updated_by'
     ];
     private $limit = 10, $order = 'DESC';
 
@@ -24,18 +24,20 @@ class Question extends Model
 
     public function answers()
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class, 'answer_question_id');
     }
 
     public function quiz()
     {
-        return $this->belongsTo(Quiz::class);
+        return $this->belongsTo(Quiz::class, 'question_quiz_id', 'quiz_id');
     }
 
     public function storeQuestion($data)
     {
-        $data['quiz_id'] = $data['quiz'];
-        return Question::create($data);
+        $data['question_quiz_id'] = $data['quiz'];
+        $data['question_name'] = $data['question']; 
+        $question = Question::create($data);
+        return $question;
     }
 
     public function getQuestions()

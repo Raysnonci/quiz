@@ -10,7 +10,7 @@
             </div>
 
             <div class="module-body">
-                <p><h3>{{ $question->question }}</h3></p>
+                <p><h3>{{ $question->question_name }}</h3></p>
 
                 <div class="module-body table">
                     <table class="table table-message">
@@ -39,7 +39,7 @@
                     <a href="{{ route('question.edit', [$question->question_id]) }}" class="btn btn-light"><button class="btn btn-primary">Edit</button></a>
                     
                     <button class="btn btn-light">
-                        <form id="delete-form{{ $question->question_id }}" method="POST" action="{{ route('question.destroy', [$question->id]) }}">
+                        <form id="delete-form{{ $question->question_id }}" method="POST" action="{{ route('question.destroy', [$question->question_id]) }}">
                             @csrf
                             {{ method_field('DELETE') }}
                             {{-- <a href="#" class="btn btn-danger">Delete</a> --}}
