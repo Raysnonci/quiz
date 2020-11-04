@@ -12,6 +12,7 @@ class UserObserver
      */
     public function creating(Model $model)
     {
+        //oooooooooy
         $created_by = $model->getPrefixName()."_created_by";
         $updated_by = $model->getPrefixName()."_updated_by";
         if(Auth::user()){
