@@ -18,6 +18,7 @@ class UserObserver
             $model->$created_by = Auth::user()->user_id;
             $model->$updated_by = Auth::user()->user_id;
         }
+        //komen
     }
 
     /**
